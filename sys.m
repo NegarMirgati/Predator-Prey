@@ -1,4 +1,4 @@
 
 function  dx = sys(t, x, A)
-   dx = A*x + Bu;
+   dx = A*x;
 end
