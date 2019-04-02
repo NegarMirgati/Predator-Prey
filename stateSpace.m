@@ -8,5 +8,5 @@ legend('x - Preys','y - Predators');
 
 figure(2);
 plot(x(:,1), x(:,2),''), xlabel('preys'), ylabel('preds'),axis([-1 1 -5 5]) 
-title(['PredPrey - predVsPrey - x = ',num2str(InitConds(1)),' & y = ',num2str(InitConds(2))])
+title(['PredPrey - predVsPrey - x = ',num2str(initConds(1)),' & y = ',num2str(initConds(2))])
 legend('x = Preys ,  y = Preds')
