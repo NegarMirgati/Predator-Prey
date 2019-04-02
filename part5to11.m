@@ -56,12 +56,15 @@ plot(t, y)
 grid
 
 
-u = 5 * sin(t);           
+u = 340 * sin(1000 * t);           
 y = lsim(Tfeed, u, t); % Calculate System Response
 figure(2)
 subplot(4, 1, 4)
 plot(t, y)
 grid
+
+figure(3)
+bode(Tfeed)
 
 
 %%%% part 11 
@@ -72,27 +75,22 @@ grid
 %disp('G Zero: ')
 %disp(zero(TFs));
 %Gtest = zpk([],P,1);
-
 %disp(Gtest);
 
-%tspan  = [1 100];
-%ics = [0.1, 2];
-%newG  = (1)/(s^2 + 0.012);
-%sysr = minreal(newG); 
-%newN = [0 0 1];
-%newD = [1 0 0.012];
-%[Ax, Bx, Cx, Dx] = tf2ss(newN, newD);
-
-%[ts,x] = ode45(@(ts, x) newG, tspan, ics(1:2));
-%figure(3);
-
-%subplot(2, 1, 1)
-%plot(ts,x(:,1),'',ts,x(:,2),''), xlabel('timestep'), ylabel('x,y values'),axis([1 100 -2.5 2.5]);
-%legend('x - Preys','y - Predators');
-%subplot(2, 1, 2)
-%plot(x(:,1), x(:,2),''), xlabel('preys'), ylabel('preds'),axis([-1 1 -5 5]) 
-%title(['PredPrey - predVsPrey - x = ',num2str(ics(1)),' & y = ',num2str(ics(2))])
-%legend('x = Preys ,  y = Preds')
+tspan  = [1 100];
+ics = [0.1, 2];
+newG  = (1)/(s^2 + 0.012);
+sysr = minreal(newG); 
+newA = tf2ss([ 0 0 1], [1 0 0.012]);
+[ts,x] = ode45(@(ts, x) sys(ts, x, newA), tspan, ics(1:2));
+figure(4);
+subplot(2, 1, 1)
+plot(ts,x(:,1),'',ts,x(:,2),''), xlabel('timestep'), ylabel('x,y values'),axis([1 100 -2.5 2.5]);
+legend('x - Preys','y - Predators');
+subplot(2, 1, 2)
+plot(x(:,1), x(:,2),''), xlabel('preys'), ylabel('preds'),axis([-1 1 -5 5]) 
+title(['PredPrey - predVsPrey - x = ',num2str(ics(1)),' & y = ',num2str(ics(2))])
+legend('x = Preys ,  y = Preds')
 
 
 
