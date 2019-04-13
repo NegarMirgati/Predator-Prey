@@ -2,6 +2,9 @@ A =  [0 -0.04; 0.3 0];
 B = [1; 0];
 C = [1 0];
 D = 0;
+%%%%%%
+[zeros, poles,kk] = ss2zp(A,B,C,D)
+%%%%%%
 SS=ss(A,B,C,D);
 TFs=tf(SS);
 [n,d]=ss2tf(A,B,C,D);
